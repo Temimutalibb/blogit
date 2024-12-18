@@ -42,6 +42,10 @@ export default function SideNav() {
     "Web_3",
     "Tech",
     "Crypto",
+    "Life_style",
+    "Inspiration",
+    "poem",
+    "Quote",
     "Others",
   ];
   const trending = data.sort((a, b) => b.click - a.click).slice(0, 5);
