@@ -28,7 +28,7 @@ export default function RootLayout({ children }) {
           </div>
 
           <div className="w-[100%] md:w-1/2">{children}</div>
-          <div className="hidden md:block w-1/4 flex ">
+          <div className=" w-1/4 flex ">
             <RightSide />
           </div>
         </div>
