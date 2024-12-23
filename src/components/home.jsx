@@ -51,13 +51,6 @@ function Home() {
     setCurrentPage((prevPage) => prevPage - 1);
   };
 
-  const handleClick = async (id) => {
-    try {
-      axios.post(`https://blogitserver.vercel.app/click`, { id: id });
-    } catch (error) {
-      console.error(error);
-    }
-  };
   const startIndex = (currentPage - 1) * itemsPerPage;
   const currentData = data.slice(startIndex, startIndex + itemsPerPage);
 
@@ -66,11 +59,7 @@ function Home() {
       <RootLayout>
         {currentData.length > 0 ? (
           currentData.map((item) => (
-            <Link
-              key={item.id}
-              to={`/blog/${item.id}`}
-              onClick={() => handleClick(item.id)}
-            >
+            <Link key={item.id} to={`/blog/${item.id}`}>
               <div className=" bg-white shadow-[0px_0px_15px_rgba(0,0,0,0.09)] p-9 m-4  space-y-3 relative overflow-hidden">
                 <div className="w-24 h-24 bg-violet-500 rounded-full absolute -right-5 -top-7">
                   <div className="absolute bottom-6 left-7 text-white text-2xl">
@@ -80,7 +69,8 @@ function Home() {
                 <div className=" text-violet-400 text-sm ">{item.category}</div>
                 <h1 className="font-bold text-xl">{item.title}</h1>
                 <div className="text-sm text-zinc-500 leading-6">
-                  {HTMLParser(convertToHtml(item.content).slice(0, 100))}....
+                  {HTMLParser(convertToHtml(item.content).slice(0, 200))}{" "}
+                  <span className="text-zinc-400">read more</span>
                 </div>
                 <div className="text-sm font-light flex justify-between text-gray-500 italic">
                   <span>

@@ -17,11 +17,10 @@ export default function Header() {
             <a href="https://roko-note.vercel.app/guest">compose</a>
           </div>
           <div className="hidden md:block">
-            <a href="./blog/12">terms</a>
+            <Link to="/blog/12">terms</Link>
           </div>
           <div className="hidden md:block">
-            {" "}
-            <a href="./blog/9">about</a>
+            <Link to="/blog/9">about</Link>
           </div>
         </div>
       </div>

@@ -1,30 +1,40 @@
+import { Link } from "react-router-dom";
+
 export default function Footer() {
   return (
     <div className="p-2 justify-between md:p-8 font-italic bg-violet-400 text-center text-white flex cursor-default  mt-8 justify-around">
       <div>
         <div className="hover:bg-violet-500 mb-1">
-          <a href="./blog/9">about</a>
+          <Link to="/blog/9">about</Link>
         </div>
         <div className="hover:bg-violet-500 mb-1">
-          <a href="./blog/10">meaning of tag</a>
+          <Link to="/blog/10">meaning of tag</Link>
         </div>
         <div className="hover:bg-violet-500 mb-1">
-          <a href="./blog/11">meaning of pin</a>
+          <Link to="/blog/11">meaning of pin</Link>
         </div>
         <div className="hover:bg-violet-500 mb-1">
-          <a href="./blog/10">how to compose message</a>
+          <Link to="/blog/10">how to compose message</Link>
         </div>
       </div>
       <div>
-        <div className="hover:bg-violet-500 mb-1">how to earn</div>
-        <div className="hover:bg-violet-500 mb-1">how to withraw</div>
+        <div className="hover:bg-violet-500 mb-1">
+          <Link to="/blog/15">how to earn</Link>
+        </div>
+        <div className="hover:bg-violet-500 mb-1">
+          <Link to="/blog/15">how to withdraw</Link>
+        </div>
       </div>
       <div>
         <div className="hover:bg-violet-500 mb-1">
-          <a href="./blog/12">terms and conditions</a>
+          <Link to="/blog/12">terms and conditions</Link>
         </div>
-        <div className="hover:bg-violet-500 mb-1">how to edit</div>
-        <div className="hover:bg-violet-500 mb-1">how to delete</div>
+        <div className="hover:bg-violet-500 mb-1">
+          <Link to="/blog/15">how to edit</Link>
+        </div>
+        <div className="hover:bg-violet-500 mb-1">
+          <Link to="/blog/15">how to delete</Link>
+        </div>
       </div>
     </div>
   );
