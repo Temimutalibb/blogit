@@ -5,11 +5,13 @@ import HTMLParser from "html-react-parser";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import RootLayout from "../layout";
+
 window.global = window;
 
 function Blog() {
   const { id } = useParams();
   const [data, setData] = useState([]);
+  const [errorMessage, setErrorMessage] = useState("loading");
 
   const convertToHtml = (data) => {
     try {
@@ -31,8 +33,10 @@ function Blog() {
           `https://blogitserver.vercel.app/data`
         );
         setData(response.data);
+        setErrorMessage("");
       } catch (error) {
         console.error(error);
+        setErrorMessage("error loading data");
       }
     };
     fetchData();
@@ -77,8 +81,13 @@ function Blog() {
             </Link>
           ))
         ) : (
-          <p>loading</p>
+          <div className="text-sm mb-3 text-center cursor-default overflow-hidden font-bold text-zinc-500 cursor-default leading-6 hover:text-violet-300">
+            {"error loading data"}
+          </div>
         )}
+        <div className="text-sm mb-3 text-center cursor-default overflow-hidden font-bold text-zinc-500 cursor-default leading-6 hover:text-violet-300">
+          {errorMessage}
+        </div>
       </RootLayout>
     </>
   );
