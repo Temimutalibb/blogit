@@ -84,7 +84,6 @@ function Blog() {
               </div>
               <div className="text-sm font-light flex justify-between text-gray-500 italic">
                 <span>
-                  {" "}
                   by{" "}
                   <a
                     className="underline"
