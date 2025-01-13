@@ -27,7 +27,7 @@ export default function RootLayout({ children }) {
             <SideNav />
           </div>
 
-          <div className="w-[100%] md:w-1/2">{children}</div>
+          <div className="w-[100%] relative md:w-1/2">{children}</div>
           <div className="hidden md:flex w-1/4 ">
             <RightSide />
           </div>

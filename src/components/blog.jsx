@@ -4,6 +4,7 @@ import { stateToHTML } from "draft-js-export-html";
 import HTMLParser from "html-react-parser";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { server } from "../App";
 import RootLayout from "../layout";
 import ShareButton from "../ui/sharebutton";
 
@@ -13,6 +14,10 @@ function Blog() {
   const { id } = useParams();
   const [data, setData] = useState([]);
   const [errorMessage, setErrorMessage] = useState("loading");
+  const [editDisplay, setEditDisplay] = useState(false);
+  const [editPin, setEditPin] = useState("");
+  const [contentId, setContentId] = useState("");
+  const [contentTag, setContentTag] = useState("");
 
   const convertToHtml = (data) => {
     try {
@@ -27,6 +32,7 @@ function Blog() {
     }
   };
 
+  //function to share on twitter
   const twitterShare = (data) => {
     const rawContentJSON = data;
     const rawContent = JSON.parse(rawContentJSON);
@@ -63,6 +69,29 @@ function Blog() {
 
   const filterData = data.filter((item) => item.id == id);
 
+  const handleDelete = () => {
+    try {
+      axios.post(`${server}delete`, {
+        id: contentId,
+        tag: contentTag,
+        pin: editPin,
+      });
+      setEditDisplay(false);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleEditButton = (id, tag) => {
+    setEditDisplay(true);
+    setContentId(id);
+    setContentTag(tag);
+  };
+
+  const handlePin = (event) => {
+    setEditPin(event.target.value);
+  };
+
   return (
     <>
       <RootLayout>
@@ -96,9 +125,20 @@ function Blog() {
                 </span>
                 <span>
                   <ShareButton
-                    url={`https://blogit.mutalibb.xyz/${item.id}`}
-                    text={`${twitterShare(item.content).substring(0, 240)}...`}
+                    url={``}
+                    text={`https://blogit.mutalibb.xyz/${
+                      item.id
+                    }..  ${twitterShare(item.content)}`}
                   />
+                </span>
+
+                <span>
+                  <button
+                    onClick={() => handleEditButton(item.id, item.tag)}
+                    className="font-medium bg-gray-100 p-1"
+                  >
+                    edit
+                  </button>
                 </span>
 
                 <span>${item.earn}</span>
@@ -113,6 +153,40 @@ function Blog() {
         <div className="text-sm mb-3 text-center cursor-default overflow-hidden font-bold text-zinc-500 cursor-default leading-6 hover:text-violet-300">
           {errorMessage}
         </div>
+
+        {editDisplay && (
+          <div className=" bg-white w-[30%] shadow-[0px_0px_15px_rgba(0,0,0,0.09)] p-9 m-12 h-auto  space-y-3 absolute  bottom-9 right-0 left-[25%]  overflow-hidden">
+            <div className="bg-white opacity-60  cursor-pointer disabled text-center font-medium shadow-[0px_0px_15px_rgba(0,0,0,0.09)] p-5 m-1 h-5 pb-9  overflow-hidden">
+              <input
+                type="text"
+                placeholder="input pin "
+                value={editPin}
+                onChange={handlePin}
+              />
+            </div>
+            <div className=" bg-white opacity-60  cursor-not-allowed disabled text-center font-medium shadow-[0px_0px_15px_rgba(0,0,0,0.09)] p-5 m-1 h-5 pb-9  overflow-hidden">
+              edit
+            </div>
+            <div
+              onClick={handleDelete}
+              className=" bg-white  cursor-default text-center font-medium shadow-[0px_0px_15px_rgba(0,0,0,0.09)] p-5 m-1 h-5 pb-9  overflow-hidden"
+            >
+              delete
+            </div>
+            <div
+              className=" bg-white opacity-60 text-center cursor-not-allowed
+          font-medium shadow-[0px_0px_15px_rgba(0,0,0,0.09)] p-5 m-1 h-5 pb-9  overflow-hidden"
+            >
+              withdraw
+            </div>
+            <div
+              onClick={() => setEditDisplay(false)}
+              className=" bg-white text-red-500  cursor-default text-center font-medium shadow-[0px_0px_15px_rgba(0,0,0,0.09)] p-5 m-1 h-5 pb-9  overflow-hidden"
+            >
+              close
+            </div>
+          </div>
+        )}
       </RootLayout>
     </>
   );
