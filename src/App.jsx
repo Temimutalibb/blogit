@@ -4,7 +4,7 @@ import Blog from "./components/blog";
 import Category from "./components/category";
 import Home from "./components/home";
 window.global = window;
-export const sever = "https://blogitserver.vercel.app/`";
+//export const sever = "https://blogitserver.vercel.app/`";
 //export const server = "http://localhost:4000/";
 
 function App() {

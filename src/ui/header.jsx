@@ -14,7 +14,7 @@ export default function Header() {
         </div>
         <div className="w-1/4 flex justify-between justify-end text-violet-500 ">
           <div>
-            <a href="https://roko.mutalibb.xyz/guest">compose</a>
+            <a href="https://roko.mutalibb.xyz/">compose</a>
           </div>
           <div className="hidden md:block">
             <Link to="/blog/12">terms</Link>

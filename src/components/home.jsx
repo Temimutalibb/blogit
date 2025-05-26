@@ -1,9 +1,10 @@
-import axios from "axios";
 import { convertFromRaw } from "draft-js";
 import { stateToHTML } from "draft-js-export-html";
+import { get, ref } from "firebase/database";
 import HTMLParser from "html-react-parser";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { database } from "../firebase";
 import RootLayout from "../layout";
 
 window.global = window;
@@ -30,6 +31,31 @@ function Home() {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        const blogRef = ref(database, "blogit");
+        const snapShot = await get(blogRef);
+        if (snapShot.exists()) {
+          const blogData = snapShot.val();
+          // Convert object to array and attach key as id
+          const blogArray = Object.keys(blogData).map((key) => ({
+            id: key,
+            ...blogData[key],
+          }));
+          setData(blogArray);
+          setErrorMessage("");
+        } else {
+          setErrorMessage("No data found");
+        }
+      } catch (error) {
+        console.error("error loading data", error);
+        setErrorMessage("error loading data");
+      }
+    };
+    fetchData();
+  }, []);
+
+  /*useEffect(() => {
+    const fetchData = async () => {
+      try {
         const response = await axios.get(
           `https://blogitserver.vercel.app/data`
         );
@@ -42,7 +68,7 @@ function Home() {
     };
     fetchData();
   }, []);
-
+*/
   const handleNext = () => {
     setCurrentPage((prevPage) => prevPage + 1);
   };
@@ -59,7 +85,7 @@ function Home() {
       <RootLayout>
         {currentData.length > 0 ? (
           currentData.map((item) => (
-            <Link key={item.id} to={`/blog/${item.id}`}>
+            <Link key={item.id} to={`/blog/${item.id}`} state={{ item }}>
               <div className=" bg-white shadow-[0px_0px_15px_rgba(0,0,0,0.09)] p-9 m-4  space-y-3 relative overflow-hidden">
                 <div className="w-24 h-24 bg-violet-500 rounded-full absolute -right-5 -top-7">
                   <div className="absolute bottom-6 left-7 text-white text-2xl">
@@ -86,7 +112,7 @@ function Home() {
                     </a>
                   </span>
 
-                  <span>${item.earn}</span>
+                  <span>$C{item.earn}</span>
                 </div>
               </div>
             </Link>
