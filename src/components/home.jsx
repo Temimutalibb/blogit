@@ -4,6 +4,7 @@ import { get, ref } from "firebase/database";
 import HTMLParser from "html-react-parser";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import likeIcon from "../assets/icons8-like-50.png";
 import { database } from "../firebase";
 import RootLayout from "../layout";
 
@@ -40,6 +41,7 @@ function Home() {
             id: key,
             ...blogData[key],
           }));
+          blogArray.sort((a, b) => b.createdAt - a.createdAt);
           setData(blogArray);
           setErrorMessage("");
         } else {
@@ -53,22 +55,6 @@ function Home() {
     fetchData();
   }, []);
 
-  /*useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          `https://blogitserver.vercel.app/data`
-        );
-        setData(response.data);
-        setErrorMessage("");
-      } catch (error) {
-        console.error(error);
-        setErrorMessage("error loading data");
-      }
-    };
-    fetchData();
-  }, []);
-*/
   const handleNext = () => {
     setCurrentPage((prevPage) => prevPage + 1);
   };
@@ -111,7 +97,16 @@ function Home() {
                       {item.username}
                     </a>
                   </span>
-
+                  <span>
+                    {" "}
+                    {item.createdAt
+                      ? new Date(item.createdAt).toLocaleString()
+                      : ""}
+                  </span>
+                  <span className=" flex items-center gap-1 justify-center ">
+                    <img src={likeIcon} alt="like" className="inline w-4 h-4" />
+                    {item.like}
+                  </span>
                   <span>$C{item.earn}</span>
                 </div>
               </div>

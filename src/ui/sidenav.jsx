@@ -1,6 +1,7 @@
-import axios from "axios";
+import { get, ref } from "firebase/database";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { database } from "../firebase";
 
 export default function SideNav() {
   const [showAll, setShowAll] = useState(false);
@@ -11,13 +12,23 @@ export default function SideNav() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          `https://blogitserver.vercel.app/data`
-        );
-        setData(response.data);
-        setErrorMessage("");
+        const blogRef = ref(database, "blogit");
+        const snapShot = await get(blogRef);
+        if (snapShot.exists()) {
+          const blogData = snapShot.val();
+          // Convert object to array and attach key as id
+          const blogArray = Object.keys(blogData).map((key) => ({
+            id: key,
+            ...blogData[key],
+          }));
+          blogArray.sort((a, b) => b.createdAt - a.createdAt);
+          setData(blogArray);
+          setErrorMessage("");
+        } else {
+          setErrorMessage("No data found");
+        }
       } catch (error) {
-        console.error(error);
+        console.error("error loading data", error);
         setErrorMessage("error loading data");
       }
     };

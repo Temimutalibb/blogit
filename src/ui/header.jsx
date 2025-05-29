@@ -10,7 +10,7 @@ export default function Header() {
           </Link>
         </div>
         <div className="w-1/4 text-violet-500 font-bold text-lg">
-          <Link to="/">blogIt</Link>
+          <Link to="/">blogIT</Link>
         </div>
         <div className="w-1/4 flex justify-between justify-end text-violet-500 ">
           <div>
