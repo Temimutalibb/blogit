@@ -90,37 +90,43 @@ function Blog() {
             <div className="text-sm text-zinc-900 leading-6">
               {HTMLParser(convertToHtml(data.content))}
             </div>
-            <div className="text-sm font-light flex justify-between text-gray-500 italic">
-              <span>
-                by{" "}
-                <a
-                  className="underline"
-                  href={data.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {data.username}
-                </a>
-              </span>
-              <span>
+            <div className="text-sm font-light flex-col flex  justify-around gap-4 text-gray-500 italic">
+              <div className="flex  justify-between ">
                 {" "}
-                {data.createdAt
-                  ? new Date(data.createdAt).toLocaleString()
-                  : ""}
-              </span>
-              <span>
-                <ShareButton
-                  url={``}
-                  text={`https://blogit.mutalibb.xyz/${id}..  ${twitterShare(
-                    data.content
-                  )}`}
-                />
-              </span>
-              <span className=" flex items-center gap-1 justify-center ">
-                <img src={likeIcon} alt="like" className="inline w-4 h-4" />
-                {data.like}
-              </span>
-              <span>$C{data.earn}</span>
+                <span>
+                  by{" "}
+                  <a
+                    className="underline"
+                    href={data.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {data.username}
+                  </a>
+                </span>
+                <span>
+                  {" "}
+                  {data.createdAt
+                    ? new Date(data.createdAt).toLocaleString()
+                    : ""}
+                </span>
+              </div>
+
+              <div className="flex  justify-between">
+                <span className=" flex items-center gap-1 justify-center ">
+                  <img src={likeIcon} alt="like" className="inline w-4 h-4" />
+                  {data.like}
+                </span>
+                <span>
+                  <ShareButton
+                    url={``}
+                    text={`https://blogit.mutalibb.xyz/${id}..  ${twitterShare(
+                      data.content
+                    )}`}
+                  />
+                </span>
+                <span>$C{data.earn}</span>
+              </div>
             </div>
           </div>
         ) : (

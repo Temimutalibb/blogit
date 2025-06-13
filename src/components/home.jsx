@@ -84,30 +84,40 @@ function Home() {
                   {HTMLParser(convertToHtml(item.content).slice(0, 200))}{" "}
                   <span className="text-zinc-400">read more</span>
                 </div>
-                <div className="text-sm font-light flex justify-between text-gray-500 italic">
-                  <span>
+                <div className="text-sm font-light flex flex-col  gap-4 text-gray-500 italic">
+                  <div className="flex gap-1 justify-between ">
+                    <span className=" flex items-center gap-1 justify-center ">
+                      <img
+                        src={likeIcon}
+                        alt="like"
+                        className="inline w-4 h-4"
+                      />
+                      {item.like}
+                    </span>
+                    <span>$C{item.earn}</span>
+                  </div>
+
+                  <div className="flex gap-1 justify-between">
                     {" "}
-                    by{" "}
-                    <a
-                      className="underline"
-                      href={item.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {item.username}
-                    </a>
-                  </span>
-                  <span>
-                    {" "}
-                    {item.createdAt
-                      ? new Date(item.createdAt).toLocaleString()
-                      : ""}
-                  </span>
-                  <span className=" flex items-center gap-1 justify-center ">
-                    <img src={likeIcon} alt="like" className="inline w-4 h-4" />
-                    {item.like}
-                  </span>
-                  <span>$C{item.earn}</span>
+                    <span>
+                      {" "}
+                      by{" "}
+                      <a
+                        className="underline"
+                        href={item.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {item.username}
+                      </a>
+                    </span>
+                    <span>
+                      {" "}
+                      {item.createdAt
+                        ? new Date(item.createdAt).toLocaleString()
+                        : ""}
+                    </span>
+                  </div>
                 </div>
               </div>
             </Link>

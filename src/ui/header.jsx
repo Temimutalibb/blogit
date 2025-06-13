@@ -17,10 +17,10 @@ export default function Header() {
             <a href="https://roko.mutalibb.xyz/">compose</a>
           </div>
           <div className="hidden md:block">
-            <Link to="/blog/12">terms</Link>
+            <Link to="/blog/-OROv6hUpWBlopCvR6qB">terms</Link>
           </div>
           <div className="hidden md:block">
-            <Link to="/blog/9">about</Link>
+            <Link to="blog/-ORR-M9M9FT-pJq5Xgl_">about</Link>
           </div>
         </div>
       </div>
