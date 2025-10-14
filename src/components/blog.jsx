@@ -1,3 +1,9 @@
+/**
+ * @file Blog.jsx
+ * @description This component is responsible for displaying a single blog post.
+ * It fetches the specific post's data from Firebase using the ID from the URL parameters.
+ * It also provides functionality for sharing the post on Twitter.
+ */
 import { convertFromRaw } from "draft-js";
 import { stateToHTML } from "draft-js-export-html";
 import { get, ref } from "firebase/database";

@@ -1,3 +1,9 @@
+/**
+ * @file Home.jsx
+ * @description This component serves as the main landing page of the blog.
+ * It fetches all blog posts from the Firebase Realtime Database, sorts them by creation date,
+ * and displays them in a paginated list. Users can navigate through pages of blog posts.
+ */
 import { convertFromRaw } from "draft-js";
 import { stateToHTML } from "draft-js-export-html";
 import { get, ref } from "firebase/database";
@@ -72,7 +78,7 @@ function Home() {
         {currentData.length > 0 ? (
           currentData.map((item) => (
             <Link key={item.id} to={`/blog/${item.id}`} state={{ item }}>
-              <div className=" bg-white shadow-[0px_0px_15px_rgba(0,0,0,0.09)] p-9 m-4  space-y-3 relative overflow-hidden">
+              <div className=" bg-white shadow-[0px_0px_15px_rgba(0,0,0,0.09)] p-9 m-4  space-y-3 relative overflow-hidden hover:shadow-[0px_0px_5px_violet]">
                 <div className="w-24 h-24 bg-violet-500 rounded-full absolute -right-5 -top-7">
                   <div className="absolute bottom-6 left-7 text-white text-2xl">
                     {item.tag}
@@ -103,7 +109,7 @@ function Home() {
                       {" "}
                       by{" "}
                       <a
-                        className="underline"
+                        className="underline hover:text-violet-300"
                         href={item.link}
                         target="_blank"
                         rel="noopener noreferrer"
@@ -131,7 +137,7 @@ function Home() {
         {currentData.length > 0 && (
           <div className="flex justify-between mx-5">
             <button
-              className="text-white bg-violet-500  shadow-[0px_0px_15px_violet] p-1"
+              className="text-white bg-violet-500  p-1 hover:bg-violet-600  hover:shadow-[0px_0px_15px_violet]"
               onClick={handleBack}
               disabled={currentPage === 1}
             >
@@ -139,7 +145,7 @@ function Home() {
               back{" "}
             </button>{" "}
             <button
-              className="text-white bg-violet-500  shadow-[0px_0px_15px_violet] p-1"
+              className="text-white bg-violet-500 p-1 hover:bg-violet-600  hover:shadow-[0px_0px_15px_violet]"
               onClick={handleNext}
               disabled={startIndex + itemsPerPage >= data.length}
             >

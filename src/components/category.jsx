@@ -1,3 +1,8 @@
+/**
+ * @file Category.jsx
+ * @description This component displays a list of blog posts that belong to a specific category.
+ * It fetches all blog data and then filters the posts based on the category ID from the URL parameters.
+ */
 import axios from "axios";
 import { convertFromRaw } from "draft-js";
 import { stateToHTML } from "draft-js-export-html";

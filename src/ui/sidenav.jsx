@@ -1,3 +1,8 @@
+/**
+ * @file sidenav.jsx
+ * @description This component renders the side navigation bar, which includes a list of categories,
+ * trending posts, and new posts to help users discover content.
+ */
 import { get, ref } from "firebase/database";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";

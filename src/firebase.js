@@ -1,23 +1,19 @@
-// Import the functions you need from the SDKs you need
+
 import { getAnalytics } from "firebase/analytics";
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getDatabase } from "firebase/database";
 import { getStorage } from "firebase/storage";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyALsexE_qIG0o0TGM_Gn66D2AbGhfmDLVg",
-  authDomain: "clancircle-ecf0b.firebaseapp.com",
-  databaseURL: "https://clancircle-ecf0b-default-rtdb.firebaseio.com",
-  projectId: "clancircle-ecf0b",
-  storageBucket: "clancircle-ecf0b.firebasestorage.app",
-  messagingSenderId: "865422713752",
-  appId: "1:865422713752:web:75cf227a5230441fbec1ed",
-  measurementId: "G-ME7S5D3X5P",
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  databaseURL: process.env.REACT_APP_DATABASE_URL,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_APP_ID,
+  measurementId: process.env.REACT_APP_MEASUREMENT_ID,
 };
 
 // Initialize Firebase
